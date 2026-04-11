@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 import { colors, text } from '../styles/Appstyles';
 import BenefitCard from '../components/BenefitCard';
@@ -56,6 +57,7 @@ function SummaryChip({ label }) {
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
       <ScrollView
@@ -92,8 +94,10 @@ export default function HomeScreen() {
             </Text>
           </Pressable>
 
-          {/* Wire onPress to BenefitsScreen navigation later */}
-          <Pressable style={({ pressed }) => [styles.actionCard, pressed && styles.pressed]}>
+          <Pressable
+            style={({ pressed }) => [styles.actionCard, pressed && styles.pressed]}
+            onPress={() => navigation.navigate('Benefits')}
+          >
             <Ionicons name="apps-outline" size={20} color={colors.brand.primary} />
             <Text style={[text.h2, styles.actionTitle]}>All benefits</Text>
             <Text style={[text.smallReg, { color: colors.neutral.secondaryText }]}>
