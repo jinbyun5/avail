@@ -106,7 +106,7 @@ export default function HomeScreen() {
             style={({ pressed }) => [styles.actionCardSecondary, pressed && styles.pressed]}
             onPress={() => navigation.navigate('Benefits')}
           >
-            <Ionicons name="apps-outline" size={20} color={colors.brand.primary} />
+            <Ionicons name="search-outline" size={20} color={colors.brand.primary} />
             <Text style={[text.h2, styles.actionTitleSecondary]}>All benefits</Text>
             <Text style={[text.smallReg, { color: colors.neutral.secondaryText }]}>
               View & filter
@@ -115,7 +115,7 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Top matches ── */}
-        <Text style={[text.label, styles.sectionLabel]}>Your top matches</Text>
+        <Text style={[text.smallMed, styles.sectionLabel]}>Your top matches</Text>
         {TOP_MATCHES.map(benefit => (
           <BenefitCard
             key={benefit.id}
