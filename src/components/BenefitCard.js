@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -38,6 +39,8 @@ const ELIGIBILITY_BADGE = {
  *   onViewDetails  — callback(id) — wire to BenefitDetailScreen navigation
  */
 export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
+  const [saved, setSaved] = useState(benefit.saved);
+
   const cardBg      = CARD_BG[benefit.category] ?? colors.neutral.cardInputNav;
   const labelPalette = CATEGORY_LABEL[benefit.category];
   const badge       = ELIGIBILITY_BADGE[benefit.eligibility] ?? ELIGIBILITY_BADGE['Likely eligible'];
@@ -69,11 +72,11 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
       {/* Save toggle + View details */}
       <View style={styles.cardFooter}>
         {/* Wire onSaveToggle to API later */}
-        <Pressable onPress={() => onSaveToggle?.(benefit.id)} hitSlop={12}>
+        <Pressable onPress={() => { setSaved(s => !s); onSaveToggle?.(benefit.id); }} hitSlop={12}>
           <Ionicons
-            name={benefit.saved ? 'star' : 'star-outline'}
+            name={saved ? 'star' : 'star-outline'}
             size={20}
-            color={benefit.saved ? colors.brand.accent : colors.neutral.placeholder}
+            color={saved ? colors.brand.accent : colors.neutral.placeholder}
           />
         </Pressable>
 

@@ -64,7 +64,6 @@ export default function App() {
                 borderTopColor:  colors.neutral.divider,
                 borderTopWidth:  1,
                 paddingTop: 8,
-                height: 72,
               },
               tabBarItemStyle: {
                 paddingTop: 4,

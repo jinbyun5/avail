@@ -62,7 +62,7 @@ export default function BenefitsScreen() {
 
       {/* ── Header ── */}
       <View style={styles.header}>
-        <Text style={[text.label, styles.matchesLabel]}>YOUR MATCHES</Text>
+        <Text style={[text.label, styles.matchesLabel]}>Your matches</Text>
         <Text style={[text.h1, styles.countTitle]}>
           {ALL_BENEFITS.length} benefits found.
         </Text>

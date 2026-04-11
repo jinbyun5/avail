@@ -10,7 +10,6 @@ import BenefitCard from '../components/BenefitCard';
 // Replace with API response shape when wiring up the backend.
 
 const SUMMARY = {
-  greeting:     'GOOD MORNING',
   annualValue:  '$7,919',
   matchedCount: 5,
   categories:   ['Student Aid', 'Tax Credit', 'Housing', 'Health'],
@@ -43,6 +42,15 @@ const TOP_MATCHES = [
   },
 ];
 
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 /** Semi-transparent pill chip used on the dark summary card. */
@@ -66,8 +74,7 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         {/* ── Header ── */}
-        <Text style={[text.label, styles.greeting]}>{SUMMARY.greeting}</Text>
-        <Text style={[text.h1, styles.pageTitle]}>Here's your summary.</Text>
+        <Text style={[text.h1, styles.pageTitle]}>{getGreeting()}, here's what you qualify for.</Text>
 
         {/* ── Summary card ── */}
         <View style={styles.summaryCard}>
@@ -85,21 +92,22 @@ export default function HomeScreen() {
 
         {/* ── Quick actions ── */}
         <View style={styles.quickActions}>
-          {/* Wire onPress to AskScreen navigation later */}
-          <Pressable style={({ pressed }) => [styles.actionCard, pressed && styles.pressed]}>
-            <Ionicons name="sparkles" size={20} color={colors.brand.primary} />
-            <Text style={[text.h2, styles.actionTitle]}>Ask avail</Text>
-            <Text style={[text.smallReg, { color: colors.neutral.secondaryText }]}>
+          {/* Primary tile — wire onPress to AskScreen navigation later */}
+          <Pressable style={({ pressed }) => [styles.actionCardPrimary, pressed && styles.pressed]}>
+            <Ionicons name="sparkles" size={20} color={colors.brand.mutedOnDark} />
+            <Text style={[text.h2, styles.actionTitlePrimary]}>Ask avail</Text>
+            <Text style={[text.smallReg, { color: colors.brand.mutedOnDark }]}>
               AI-powered Q&A
             </Text>
           </Pressable>
 
+          {/* Secondary tile */}
           <Pressable
-            style={({ pressed }) => [styles.actionCard, pressed && styles.pressed]}
+            style={({ pressed }) => [styles.actionCardSecondary, pressed && styles.pressed]}
             onPress={() => navigation.navigate('Benefits')}
           >
             <Ionicons name="apps-outline" size={20} color={colors.brand.primary} />
-            <Text style={[text.h2, styles.actionTitle]}>All benefits</Text>
+            <Text style={[text.h2, styles.actionTitleSecondary]}>All benefits</Text>
             <Text style={[text.smallReg, { color: colors.neutral.secondaryText }]}>
               View & filter
             </Text>
@@ -107,7 +115,7 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Top matches ── */}
-        <Text style={[text.label, styles.sectionLabel]}>TOP MATCHES</Text>
+        <Text style={[text.label, styles.sectionLabel]}>Your top matches</Text>
         {TOP_MATCHES.map(benefit => (
           <BenefitCard
             key={benefit.id}
@@ -138,10 +146,6 @@ const styles = StyleSheet.create({
   },
 
   // Header
-  greeting: {
-    color: colors.brand.accent,
-    marginBottom: 4,
-  },
   pageTitle: {
     color: colors.neutral.primaryText,
     marginBottom: 20,
@@ -187,19 +191,26 @@ const styles = StyleSheet.create({
     gap: 12,
     marginBottom: 28,
   },
-  actionCard: {
-    flex: 1,
-    backgroundColor: colors.neutral.cardInputNav,
+  actionCardPrimary: {
+    flex: 6,
+    backgroundColor: colors.brand.accent,
     borderRadius: 12,
     padding: 16,
     gap: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 4,
-    elevation: 1,
   },
-  actionTitle: {
+  actionCardSecondary: {
+    flex: 4,
+    borderRadius: 12,
+    padding: 16,
+    gap: 4,
+    borderWidth: 1,
+    borderColor: colors.neutral.divider,
+  },
+  actionTitlePrimary: {
+    color: '#FFFFFF',
+    marginTop: 8,
+  },
+  actionTitleSecondary: {
     color: colors.neutral.primaryText,
     marginTop: 8,
   },
