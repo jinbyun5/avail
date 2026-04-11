@@ -70,11 +70,21 @@ export const colors = {
     studentAid:     '#EBF0FF',
     studentAidText: '#3A349E',
 
-    workplace:      '#FFF6EA',
-    workplaceText:  '#9C442A',
+    // Changed this to health, from workplace
+    health:      '#FFF6EA',
+    healthText:  '#9C442A',
 
     housing:        '#DBF2F2',
     housingText:    '#186767',
+  },
+
+  // Added this, lemme me know what you guys thing
+  benefitCards: {
+    taxCard:        '#E0F4F4',
+
+    studentAidCard: '#E0F0F9',
+
+    healthCard:     '#FEF2F2',
   },
 
 };
