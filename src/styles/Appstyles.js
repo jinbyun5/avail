@@ -21,29 +21,95 @@ export const text = {
   label:    { fontFamily: 'Montserrat_500Medium',  fontSize: 11, lineHeight: 15, letterSpacing: 0.8 },
 };
 
+// export const colors = {
+
+//   // Brand colors
+//   brand: {
+//     hoverLight:   '#E0F4F4',
+//     mutedOnDark:  '#7ECECE',
+//     accent:       '#0E9090',
+//     hoverAccent:  '#0A6B6B',
+//     primary:      '#0F3D3E',
+//     pressed:      '#061E1F',
+//   },
+
+//   // Neutral scales
+//   neutral: {
+//     appBg:         '#F0FAFA',
+//     cardInputNav:  '#FEFDFD',
+//     divider:       '#CBD5E1',
+//     placeholder:   '#94A3B8',
+//     secondaryText: '#64748B',
+//     primaryText:   '#1E293B',
+//   },
+
+//   // Status colors
+//   status: {
+//     success:        '#E7F6EE',
+//     successOutline: '#64C896',
+//     successText:    '#185A3C',
+
+//     warning:        '#FEF8E9',
+//     warningOutline: '#F3C13A',
+//     warningText:    '#795E11',
+
+//     error:          '#FEF0F0',
+//     errorOutline:   '#EE9595',
+//     errorText:      '#8E1A1A',
+
+//     info:           '#CDF7F7',
+//     infoOutline:    '#73C7C7',
+//     infoText:       '#1B3F40',
+//   },
+
+//   // Category label colors
+//   label: {
+//     tax:          '#FDF0F7',
+//     taxText:      '#7B1884',
+       
+//     studentAid:     '#EBF0FF',
+//     studentAidText: '#3A349E',
+
+//     // Changed this to health, from workplace
+//     health:      '#FFF6EA',
+//     healthText:  '#9C442A',
+
+//     housing:        '#DBF2F2',
+//     housingText:    '#186767',
+//   },
+
+//   // Added this, lemme me know what you guys thing
+//   benefitCards: {
+//     taxCard:        '#E0F4F4',
+
+//     studentAidCard: '#E0F0F9',
+
+//     healthCard:     '#FEF2F2',
+//   },
+
+// };
+
+
 export const colors = {
 
-  // Brand colors
+  // Primary
   brand: {
-    hoverLight:   '#E0F4F4',
-    mutedOnDark:  '#7ECECE',
-    accent:       '#0E9090',
-    hoverAccent:  '#0A6B6B',
-    primary:      '#0F3D3E',
-    pressed:      '#061E1F',
+    teal50:  '#F0FAFA',
+    teal100: '#E0F4F4',
+    teal300: '#7ECECE',
+    teal500: '#0E9090',
+    teal700: '#0A6B6B',
+    teal900: '#0F3D3E',
   },
 
-  // Neutral scales
+  // Neutral
   neutral: {
-    appBg:         '#F0FAFA',
-    cardInputNav:  '#FEFDFD',
-    divider:       '#CBD5E1',
-    placeholder:   '#94A3B8',
-    secondaryText: '#64748B',
-    primaryText:   '#1E293B',
+    gray300: '#CBD5E1',
+    gray400: '#94A3B8',
+    gray500: '#64748B',
   },
 
-  // Status colors
+  // Status Labels
   status: {
     success:        '#E7F6EE',
     successOutline: '#64C896',
@@ -56,35 +122,25 @@ export const colors = {
     error:          '#FEF0F0',
     errorOutline:   '#EE9595',
     errorText:      '#8E1A1A',
-
-    info:           '#CDF7F7',
-    infoOutline:    '#73C7C7',
-    infoText:       '#1B3F40',
   },
 
-  // Category label colors
+  // Info Labels
   label: {
-    tax:          '#FDF0F7',
-    taxText:      '#7B1884',
-       
+    tax:            '#FDF0F7',
+    taxText:        '#7B1884',
+
     studentAid:     '#EBF0FF',
     studentAidText: '#3A349E',
 
-    // Changed this to health, from workplace
-    health:      '#FFF6EA',
-    healthText:  '#9C442A',
-
-    housing:        '#DBF2F2',
-    housingText:    '#186767',
+    health:         '#FFF6EA',
+    healthText:     '#9C442A',
   },
 
-  // Added this, lemme me know what you guys thing
-  benefitCards: {
-    taxCard:        '#E0F4F4',
-
-    studentAidCard: '#E0F0F9',
-
-    healthCard:     '#FEF2F2',
+  // Cards
+  cards: {
+    studentAid: '#E0F0F9',
+    tax:        '#E0F4F4',
+    health:     '#FFF6EA',
   },
 
 };
