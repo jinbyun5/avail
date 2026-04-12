@@ -10,6 +10,9 @@ import HomeScreen    from './src/screens/HomeScreen';
 import BenefitsScreen from './src/screens/BenefitsScreen';
 import AskScreen     from './src/screens/AskScreen';
 import ProfileScreen  from './src/screens/ProfileScreen';
+import Quiz5Screen from './src/screens/onboarding/Quiz5Screen';
+import BenefitDetailScreen from './src/screens/BenefitDetailScreen';
+
 
 import { colors, text } from './src/styles/Appstyles';
 
@@ -54,7 +57,7 @@ export default function App() {
                 );
               },
               tabBarActiveTintColor:   colors.brand.primary,
-              tabBarInactiveTintColor: colors.neutral.secondaryText,
+              tabBarInactiveTintColor: colors.neutral.placeholder,
               tabBarLabelStyle: {
                 ...text.label,
                 marginBottom: 4,

@@ -66,7 +66,7 @@ export const colors = {
   label: {
     tax:          '#FDF0F7',
     taxText:      '#7B1884',
-
+       
     studentAid:     '#EBF0FF',
     studentAidText: '#3A349E',
 
