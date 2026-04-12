@@ -116,7 +116,7 @@ export default function BenefitsScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.neutral.appBg,
+    backgroundColor: colors.primary.teal50,
   },
 
   // Header
@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   matchesLabel: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
     marginBottom: 4,
   },
   countTitle: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
   },
 
   // Filter chips
@@ -147,16 +147,16 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 100,
     borderWidth: 1,
-    borderColor: colors.neutral.divider,
+    borderColor: colors.neutral.gray300,
   },
   filterChipActive: {
-    borderColor: colors.brand.accent,
+    borderColor: colors.primary.teal500,
   },
   filterLabel: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
   },
   filterLabelActive: {
-    color: colors.brand.accent,
+    color: colors.primary.teal500,
   },
 
   // Benefits list

@@ -40,7 +40,7 @@ export default function WelcomeScreen() {
         <View style={styles.features}>
           {FEATURES.map(feature => (
             <View key={feature} style={styles.featureRow}>
-              <Ionicons name="checkmark-circle" size={24} color={colors.brand.accent} />
+              <Ionicons name="checkmark-circle" size={24} color={colors.primary.teal500} />
               <Text style={[text.bodyReg, styles.featureText]}>{feature}</Text>
             </View>
           ))}
@@ -70,7 +70,7 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.neutral.cardInputNav,
+    backgroundColor: colors.neutral.gray300,
   },
 
   // Content
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 14,
-    backgroundColor: colors.brand.hoverLight,
+    backgroundColor: colors.primary.teal100,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 24,
@@ -94,11 +94,11 @@ const styles = StyleSheet.create({
     height: 40,
   },
   headline: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginBottom: 16,
   },
   body: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
     marginBottom: 32,
   },
 
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   featureText: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     flex: 1,
   },
 
@@ -125,20 +125,21 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: colors.brand.primary,
+    backgroundColor: colors.primary.teal900,
     borderRadius: 14,
     paddingVertical: 18,
     alignItems: 'center',
     marginBottom: 12,
   },
   buttonPressed: {
-    backgroundColor: colors.brand.pressed,
+    // backgroundColor: colors.brand.pressed,
+    backgroundColor: colors.primary.teal900,
   },
   buttonText: {
     color: '#FFFFFF',
   },
   disclaimer: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
     textAlign: 'center',
   },
 });

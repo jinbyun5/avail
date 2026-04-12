@@ -94,9 +94,9 @@ export default function HomeScreen() {
         <View style={styles.quickActions}>
           {/* Primary tile — wire onPress to AskScreen navigation later */}
           <Pressable style={({ pressed }) => [styles.actionCardPrimary, pressed && styles.pressed]}>
-            <Ionicons name="sparkles" size={20} color={colors.brand.mutedOnDark} />
+            <Ionicons name="sparkles" size={20} color={colors.primary.teal300} />
             <Text style={[text.h2, styles.actionTitlePrimary]}>Ask avail</Text>
-            <Text style={[text.smallReg, { color: colors.brand.mutedOnDark }]}>
+            <Text style={[text.smallReg, { color: colors.primary.teal300 }]}>
               AI-powered Q&A
             </Text>
           </Pressable>
@@ -106,9 +106,9 @@ export default function HomeScreen() {
             style={({ pressed }) => [styles.actionCardSecondary, pressed && styles.pressed]}
             onPress={() => navigation.navigate('Benefits')}
           >
-            <Ionicons name="search-outline" size={20} color={colors.brand.primary} />
+            <Ionicons name="search-outline" size={20} color={colors.primary.teal900} />
             <Text style={[text.h2, styles.actionTitleSecondary]}>All benefits</Text>
-            <Text style={[text.smallReg, { color: colors.neutral.secondaryText }]}>
+            <Text style={[text.smallReg, { color: colors.neutral.gray500 }]}>
               View & filter
             </Text>
           </Pressable>
@@ -134,7 +134,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.neutral.appBg,
+    backgroundColor: colors.primary.teal50,
   },
   scroll: {
     flex: 1,
@@ -147,19 +147,19 @@ const styles = StyleSheet.create({
 
   // Header
   pageTitle: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginBottom: 20,
   },
 
   // Summary card
   summaryCard: {
-    backgroundColor: colors.brand.primary,
+    backgroundColor: colors.primary.teal900,
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
   },
   summaryLabel: {
-    color: colors.brand.mutedOnDark,
+    color: colors.primary.teal100,
     marginBottom: 8,
   },
   summaryValue: {
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   actionCardPrimary: {
     flex: 6,
-    backgroundColor: colors.brand.accent,
+    backgroundColor: colors.primary.teal500,
     borderRadius: 12,
     padding: 16,
     gap: 4,
@@ -204,14 +204,14 @@ const styles = StyleSheet.create({
     padding: 16,
     gap: 4,
     borderWidth: 1,
-    borderColor: colors.neutral.divider,
+    borderColor: colors.neutral.gray300,
   },
   actionTitlePrimary: {
     color: '#FFFFFF',
     marginTop: 8,
   },
   actionTitleSecondary: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginTop: 8,
   },
   pressed: {
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
 
   // Section label
   sectionLabel: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
     marginBottom: 12,
   },
 });

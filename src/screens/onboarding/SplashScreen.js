@@ -31,7 +31,7 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.brand.primary,
+    backgroundColor: colors.primary.teal900,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     width: 96,
     height: 96,
     borderRadius: 24,
-    backgroundColor: colors.brand.accent,
+    backgroundColor: colors.primary.teal500,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
@@ -54,6 +54,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   tagline: {
-    color: colors.brand.mutedOnDark,
+    color: colors.primary.teal300,
   },
 });

@@ -8,10 +8,10 @@ import { colors, text } from '../styles/Appstyles';
 // Add new categories here as the backend introduces them.
 
 export const CARD_BG = {
-  'Student Aid': colors.benefitCards.studentAidCard,
-  'Tax Credit':  colors.benefitCards.taxCard,
-  'Health':      colors.benefitCards.healthCard,
-  'Housing':     colors.neutral.cardInputNav,   // token TBD
+  'Student Aid': colors.cards.studentAid,
+  'Tax Credit':  colors.cards.tax,
+  'Health':      colors.cards.health,
+  'Housing':     colors.neutral.gray300,   // token TBD
 };
 
 export const CATEGORY_LABEL = {
@@ -41,7 +41,7 @@ const ELIGIBILITY_BADGE = {
 export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
   const [saved, setSaved] = useState(benefit.saved);
 
-  const cardBg      = CARD_BG[benefit.category] ?? colors.neutral.cardInputNav;
+  const cardBg      = CARD_BG[benefit.category] ?? colors.neutral.gray300;
   const labelPalette = CATEGORY_LABEL[benefit.category];
   const badge       = ELIGIBILITY_BADGE[benefit.eligibility] ?? ELIGIBILITY_BADGE['Likely eligible'];
 
@@ -50,8 +50,8 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
 
       {/* Category chip + eligibility badge */}
       <View style={styles.cardTop}>
-        <View style={[styles.categoryChip, { backgroundColor: labelPalette?.bg ?? colors.neutral.divider }]}>
-          <Text style={[text.smallMed, { color: labelPalette?.fg ?? colors.neutral.primaryText }]}>
+        <View style={[styles.categoryChip, { backgroundColor: labelPalette?.bg ?? colors.neutral.gray300 }]}>
+          <Text style={[text.smallMed, { color: labelPalette?.fg ?? colors.primary.teal900 }]}>
             {benefit.category}
           </Text>
         </View>
@@ -65,7 +65,7 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
 
       {/* Title + amount */}
       <Text style={[text.h2, styles.title]}>{benefit.title}</Text>
-      <Text style={[text.smallReg, { color: colors.neutral.secondaryText }]}>
+      <Text style={[text.smallReg, { color: colors.neutral.gray500 }]}>
         {benefit.amount}
       </Text>
 
@@ -76,7 +76,7 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
           <Ionicons
             name={saved ? 'star' : 'star-outline'}
             size={20}
-            color={saved ? colors.brand.accent : colors.neutral.placeholder}
+            color={saved ? colors.primary.teal500 : colors.neutral.gray400}
           />
         </Pressable>
 
@@ -86,10 +86,10 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
           onPress={() => onViewDetails?.(benefit.id)}
           hitSlop={12}
         >
-          <Text style={[text.smallMed, { color: colors.neutral.primaryText }]}>
+          <Text style={[text.smallMed, { color: colors.primary.teal900 }]}>
             View details
           </Text>
-          <Ionicons name="chevron-forward" size={14} color={colors.neutral.primaryText} />
+          <Ionicons name="chevron-forward" size={14} color={colors.primary.teal900} />
         </Pressable>
       </View>
     </View>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   title: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginBottom: 2,
   },
   cardFooter: {
