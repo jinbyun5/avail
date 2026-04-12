@@ -93,7 +93,7 @@ export const text = {
 export const colors = {
 
   // Primary
-  brand: {
+  primary: {
     teal50:  '#F0FAFA',
     teal100: '#E0F4F4',
     teal300: '#7ECECE',
