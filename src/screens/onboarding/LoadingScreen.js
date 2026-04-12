@@ -1,22 +1,58 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { ActivityIndicator } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import Button from '../../components/Button';
+import { buildPrompt } from '../../data/prompt';
 import { colors, text } from '../../styles/Appstyles';
 
 export default function LoadingScreen({ navigation, route }) {
 
   const answers = route.params?.answers || {};
+  console.log(answers);
+  // {"dental": true, "disability": true, "firstGen": true, "income": "over80k", "partTime": true, "renting": true, "schoolType": "college", "studentStatus": "pr", "studyLoad": "full-time"}
+
+  const [error, setError] = useState(false);
+
+  const fetchBenefits = useCallback(async () => {
+    setError(false);
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+            'x-api-key': process.env.EXPO_PUBLIC_ANTHROPIC_API_KEY,
+            'anthropic-version': '2023-06-01',
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 1024,
+          messages: [{ 
+            role: 'user', 
+            content: buildPrompt(answers) 
+          }],
+        }),
+      });
+
+      const data = await response.json();
+      const raw = data.content[0].text.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(raw);
+      console.log(JSON.stringify(parsed, null, 2));
+
+      await AsyncStorage.setItem('benefits', JSON.stringify(parsed));
+      await AsyncStorage.setItem('profile', JSON.stringify(answers));
+
+      navigation.navigate('MainTabs');
+    } catch (err) {
+      console.error(err);
+      setError(true);
+    }
+  }, []);
 
   useEffect(() => {
-    // Replace with Claude API call later
-    const timer = setTimeout(() => {
-      navigation.navigate('MainTabs');
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    fetchBenefits();
   }, []);
 
   return (
@@ -30,14 +66,29 @@ export default function LoadingScreen({ navigation, route }) {
 
       {/* Center content */}
       <View style={styles.center}>
-        <ActivityIndicator
-          size={64}
-          color={colors.primary.teal300}
-          style={styles.spinner}
-        />
-        <Text style={[text.bodyReg, styles.loadingText]}>
-          Matching your profile{'\n'}against BC student grants{'\n'}and programs
-        </Text>
+        {error ? (
+          <>
+            <Text style={[text.bodyReg, styles.loadingText]}>
+              Something went wrong.{'\n'}Please try again.
+            </Text>
+            <Button
+              label="Reload"
+              onPress={fetchBenefits}
+              style={{ marginTop: 24, paddingHorizontal: 40 }}
+            />
+          </>
+        ) : (
+          <>
+            <ActivityIndicator
+              size={64}
+              color={colors.primary.teal300}
+              style={styles.spinner}
+            />
+            <Text style={[text.bodyReg, styles.loadingText]}>
+              Matching your profile{'\n'}against BC student grants{'\n'}and programs
+            </Text>
+          </>
+        )}
       </View>
 
     </SafeAreaView>
