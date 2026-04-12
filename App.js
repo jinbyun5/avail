@@ -6,11 +6,14 @@ import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 
+import SplashScreen from './src/screens/onboarding/SplashScreen';
+import WelcomeScreen from './src/screens/onboarding/WelcomeScreen';
+import Quiz5Screen from './src/screens/onboarding/Quiz5Screen';
+
 import HomeScreen    from './src/screens/HomeScreen';
 import BenefitsScreen from './src/screens/BenefitsScreen';
 import AskScreen     from './src/screens/AskScreen';
 import ProfileScreen  from './src/screens/ProfileScreen';
-import Quiz5Screen from './src/screens/onboarding/Quiz5Screen';
 import BenefitDetailScreen from './src/screens/BenefitDetailScreen';
 
 
@@ -37,8 +40,8 @@ export default function App() {
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <StatusBar style="dark" />
       {!fontsLoaded ? (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.neutral.appBg }}>
-          <ActivityIndicator color={colors.brand.accent} />
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.primary.teal50 }}>
+          <ActivityIndicator color={colors.primary.teal500} />
         </View>
       ) : (
         <NavigationContainer>
@@ -52,19 +55,19 @@ export default function App() {
                   <Ionicons
                     name={iconName}
                     size={24}
-                    color={focused ? colors.brand.primary : colors.neutral.secondaryText}
+                    color={focused ? colors.primary.teal900 : colors.neutral.gray500}
                   />
                 );
               },
-              tabBarActiveTintColor:   colors.brand.primary,
-              tabBarInactiveTintColor: colors.neutral.placeholder,
+              tabBarActiveTintColor:   colors.primary.teal900,
+              tabBarInactiveTintColor: colors.neutral.gray400,
               tabBarLabelStyle: {
                 ...text.label,
                 marginBottom: 4,
               },
               tabBarStyle: {
-                backgroundColor: colors.neutral.cardInputNav,
-                borderTopColor:  colors.neutral.divider,
+                backgroundColor: colors.neutral.gray300,
+                borderTopColor:  colors.neutral.gray300,
                 borderTopWidth:  1,
                 paddingTop: 8,
               },
