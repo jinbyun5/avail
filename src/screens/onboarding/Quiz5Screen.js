@@ -2,6 +2,7 @@ import React, { useState, useCallback} from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image, } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 import Button from '../../components/Button';
 
@@ -45,8 +46,15 @@ export default function Quiz5Screen({ navigation, route }) {
 
   const allAnswered = Object.values(answers).every(v => v !== null);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const allAnswers = { ...previousAnswers, ...answers };
+    // Save to AsyncStorage
+    try {
+      await AsyncStorage.setItem('userProfile', JSON.stringify(allAnswers));
+    } catch (error) {
+      console.error('Failed to save profile:', error);
+    }
+
     navigation.navigate('Loading', { answers: allAnswers });
   };
 
