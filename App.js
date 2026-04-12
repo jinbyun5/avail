@@ -57,8 +57,8 @@ function MainTabs() {
           marginBottom: 4,
         },
         tabBarStyle: {
-          backgroundColor: colors.neutral.gray300,
-          borderTopColor:  colors.neutral.gray300,
+          backgroundColor: '#FFFFFF',
+          borderTopColor:  '#FFFFFF',
           borderTopWidth:  1,
           paddingTop: 8,
         },
