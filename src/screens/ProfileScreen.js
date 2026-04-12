@@ -120,9 +120,10 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.primary.teal50,
     },
+
     content: {
         paddingHorizontal: 20,
-        paddingBottom: 100,
+        paddingBottom: 32,
         flexGrow: 1,
     },
 
@@ -178,6 +179,7 @@ const styles = StyleSheet.create({
         borderColor: colors.neutral.gray300,
         marginBottom: 24,
     },
+
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -186,13 +188,16 @@ const styles = StyleSheet.create({
         minHeight: 57,
         paddingHorizontal: 20,
     },
+
     rowLabel: {
         color: colors.neutral.gray500,
     },
+
     rowValue: {
         color: '#1E293B',
         lineHeight: 24,
     },
+
     divider: {
         height: 1,
         backgroundColor: colors.neutral.gray300,
