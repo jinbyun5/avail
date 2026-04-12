@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 import { colors, text } from '../styles/Appstyles';
 import BenefitCard from '../components/BenefitCard';
@@ -50,6 +52,7 @@ const FILTER_CATEGORIES = ['All', 'Student Aid', 'Tax Credit', 'Housing'];
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function BenefitsScreen() {
+  const navigation = useNavigation();
   const [activeFilter, setActiveFilter] = useState('All');
 
   const filteredBenefits =
@@ -62,6 +65,10 @@ export default function BenefitsScreen() {
 
       {/* ── Header ── */}
       <View style={styles.header}>
+        <Pressable style={styles.backButton} onPress={() => navigation.navigate('Home')} hitSlop={12}>
+          <Ionicons name="chevron-back" size={18} color={colors.neutral.secondaryText} />
+          <Text style={[text.bodyReg, styles.backLabel]}>Back</Text>
+        </Pressable>
         <Text style={[text.label, styles.matchesLabel]}>Your matches</Text>
         <Text style={[text.h1, styles.countTitle]}>
           {ALL_BENEFITS.length} benefits found.
@@ -122,8 +129,17 @@ const styles = StyleSheet.create({
   // Header
   header: {
     paddingHorizontal: 20,
-    paddingTop: 24,
+    paddingTop: 16,
     paddingBottom: 16,
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    marginBottom: 16,
+  },
+  backLabel: {
+    color: colors.neutral.secondaryText,
   },
   matchesLabel: {
     color: colors.neutral.gray500,

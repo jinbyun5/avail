@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -73,6 +73,18 @@ export default function HomeScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
+        {/* ── Brand header ── */}
+        <View style={styles.brandHeader}>
+          <View style={styles.brandIconWrapper}>
+            <Image
+              source={require('../../assets/icon.png')}
+              style={styles.brandIcon}
+              resizeMode="contain"
+            />
+          </View>
+          <Text style={styles.brandName}>Avail</Text>
+        </View>
+
         {/* ── Header ── */}
         <Text style={[text.h1, styles.pageTitle]}>{getGreeting()}, here's what you qualify for.</Text>
 
@@ -143,6 +155,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 24,
     paddingBottom: 24,
+  },
+
+  // Brand header
+  brandHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    marginBottom: 24,
+  },
+  brandIconWrapper: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: colors.primary.teal500,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+  },
+  brandIcon: {
+    width: 28,
+    height: 28,
+  },
+  brandName: {
+    fontFamily: 'Montserrat_500Medium',
+    fontSize: 16,
+    color: colors.primary.teal900,
   },
 
   // Header
