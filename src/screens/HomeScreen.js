@@ -104,8 +104,11 @@ export default function HomeScreen() {
 
         {/* ── Quick actions ── */}
         <View style={styles.quickActions}>
-          {/* Primary tile — wire onPress to AskScreen navigation later */}
-          <Pressable style={({ pressed }) => [styles.actionCardPrimary, pressed && styles.pressed]}>
+          {/* Primary tile */}
+          <Pressable style={({ pressed }) => [styles.actionCardPrimary, pressed && styles.pressed]}
+            
+            onPress={() => navigation.navigate('Ask')}
+          >
             <Ionicons name="sparkles" size={20} color={colors.primary.teal300} />
             <Text style={[text.h2, styles.actionTitlePrimary]}>Ask avail</Text>
             <Text style={[text.smallReg, { color: colors.primary.teal300 }]}>
