@@ -15,7 +15,7 @@ const FEATURES = [
 // ─── Screen ───────────────────────────────────────────────────────────────────
 // Wire onGetStarted to the first quiz screen once the onboarding flow is connected.
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({ navigation }) {
   return (
     <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
 
@@ -49,9 +49,9 @@ export default function WelcomeScreen() {
 
       {/* ── Footer ── */}
       <View style={styles.footer}>
-        {/* Wire onPress to Quiz1Screen later */}
         <Pressable
           style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+          onPress={() => navigation.navigate('Quiz1')}
         >
           <Text style={[text.bodyMed, styles.buttonText]}>Get started</Text>
         </Pressable>
@@ -70,13 +70,13 @@ export default function WelcomeScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.neutral.gray300,
+    backgroundColor: '#fff',
   },
 
   // Content
   content: {
     flex: 1,
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     paddingTop: 32,
   },
   logoWrapper: {
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
 
   // Footer
   footer: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 20,
     paddingTop: 16,
     paddingBottom: 8,
     alignItems: 'center',

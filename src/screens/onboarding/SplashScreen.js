@@ -1,13 +1,21 @@
+import { useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
 import { colors, text } from '../../styles/Appstyles';
 
 // ─── Screen ───────────────────────────────────────────────────────────────────
-// Navigation to the next onboarding screen will be wired here once
-// the onboarding flow is connected.
 
-export default function SplashScreen() {
+export default function SplashScreen({ navigation }) {
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigation.navigate('Welcome');
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar style="light" />

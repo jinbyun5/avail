@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import React, { useState, useCallback} from 'react';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Image, } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors, text } from '../../styles/Appstyles';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+
+import Button from '../../components/Button';
+
+import { colors, text } from '../../styles/Appstyles';
 
 const QUESTIONS = [
   { key: 'renting',    label: 'Are you currently renting?' },
@@ -138,30 +133,8 @@ export default function Quiz5Screen({ navigation, route }) {
           </View>
         ))}
 
-        {/* Find my benefits */}
-        <TouchableOpacity
-          style={[
-            styles.submitBtn,
-            !allAnswered && styles.submitBtnDisabled,
-          ]}
-          onPress={handleSubmit}
-          disabled={!allAnswered}
-          activeOpacity={0.8}
-        >
-          <Text style={[text.bodyMed, styles.submitText]}>
-            Find my benefits
-          </Text>
-        </TouchableOpacity>
-
-        {/* Back */}
-        <TouchableOpacity
-          style={styles.backBtn}
-          onPress={() => navigation.goBack()}
-        >
-          <Text style={[text.smallReg, styles.backText]}>
-            ‹  Back
-          </Text>
-        </TouchableOpacity>
+        <Button label="Find my benefits" onPress={handleSubmit} disabled={!allAnswered} />
+        <Button label="‹  Back" onPress={() => navigation.goBack()} variant="back" style={{ marginTop: 12 }} />
 
       </ScrollView>
     </SafeAreaView>
@@ -171,7 +144,7 @@ export default function Quiz5Screen({ navigation, route }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.neutral.gray300,
+    backgroundColor: '#fff',
   },
   content: {
     paddingHorizontal: 20,
@@ -248,7 +221,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1.5,
     borderColor: colors.neutral.gray300,
-    backgroundColor: colors.neutral.gray300,
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -261,31 +234,5 @@ const styles = StyleSheet.create({
   },
   optionTextSelected: {
     color: colors.primary.teal900,
-  },
-
-  // Submit
-  submitBtn: {
-    height: 52,
-    backgroundColor: colors.primary.teal900,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 8,
-    marginBottom: 16,
-  },
-  submitBtnDisabled: {
-    backgroundColor: colors.neutral.gray400,
-  },
-  submitText: {
-    color: colors.neutral.gray300,
-  },
-
-  // Back
-  backBtn: {
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  backText: {
-    color: colors.neutral.gray500,
   },
 });
