@@ -96,7 +96,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
 
         {/* Back */}
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-          <Ionicons name="chevron-back" size={16} color={colors.neutral.secondaryText} />
+          <Ionicons name="chevron-back" size={16} color={colors.neutral.gray500} />
           <Text style={[text.bodyMed, styles.backText]}>Back</Text>
         </TouchableOpacity>
 
@@ -117,7 +117,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
         {/* Likely eligible badge */}
         <View style={styles.eligibilityBadge}>
           <View style={styles.eligibilityIcon}>
-            <Ionicons name="checkmark" size={14} color={colors.neutral.cardInputNav} />
+            <Ionicons name="checkmark" size={14} color={colors.neutral.gray300} />
           </View>
           <View>
             <Text style={[text.bodyMed,styles.eligibilityTitle]}>
@@ -142,7 +142,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
           <View key={i} style={styles.requirementRow}>
         {/* Checkmark with circle background */}
         <View style={styles.checkCircle}>
-            <Ionicons name="checkmark" size={12} color={colors.brand.primary} />
+            <Ionicons name="checkmark" size={12} color={colors.primary.teal900} />
         </View>
             <Text style={[text.bodyReg, styles.requirementText]}>{req}</Text>
           </View>
@@ -159,7 +159,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
         {/* Apply button */}
         <TouchableOpacity style={styles.applyBtn} onPress={handleApply} activeOpacity={0.8}>
           <Text style={[text.bodyMed, styles.applyBtnText]}>{benefit.applyLabel}</Text>
-          <Ionicons name="open-outline" size={16} color={colors.neutral.cardInputNav} />
+          <Ionicons name="open-outline" size={16} color={colors.neutral.gray300} />
         </TouchableOpacity>
 
         {/* Ask avail button */}
@@ -169,7 +169,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
 
         {/* Save for later */}
         <TouchableOpacity style={styles.saveBtn} activeOpacity={0.7}>
-          <Ionicons name="star-outline" size={16} color={colors.neutral.secondaryText} />
+          <Ionicons name="star-outline" size={16} color={colors.neutral.gray500} />
           <Text style={[text.smallReg, styles.saveText]}>Save for later</Text>
         </TouchableOpacity>
         </View>
@@ -184,7 +184,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.benefitCards.studentAidCard,
+    backgroundColor: colors.cards.studentAid,
   },
   content: {
     paddingBottom: 0,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   backText: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
   },
 
   // Category tag
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 
   // Title + Amount
   title: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginBottom: 4,
     paddingHorizontal: 20,
   },
@@ -252,22 +252,22 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   eligibilityTitle: {
-    color: colors.neutral.primary,
+    color: colors.primary.teal900,
     marginBottom: 2,
   },
   eligibilitySubtitle: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
   },
 
   // Description
   description: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginBottom: 24,
   },
 
   // Section label
   sectionLabel: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
     marginBottom: 12,
   },
 
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
   },
   requirementText: {
     flex: 1,
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
   },
 
   // How to Apply
@@ -295,13 +295,13 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   howToApplyText: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
   },
 
   // Apply button
   applyBtn: {
     height: 52,
-    backgroundColor: colors.brand.primary,
+    backgroundColor: colors.primary.teal900,
     borderRadius: 12,
     flexDirection: 'row',
     alignItems: 'center',
@@ -310,20 +310,20 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   applyBtnText: {
-    color: colors.neutral.cardInputNav,
+    color: colors.neutral.gray300,
   },
 
   // Ask avail button
   askBtn: {
     height: 52,
     borderRadius: 12,
-    backgroundColor: colors.brand.hoverLight,
+    backgroundColor: colors.primary.teal100,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
   },
   askBtnText: {
-    color: colors.brand.primary,
+    color: colors.primary.teal900,
   },
 
   // Save for later
@@ -334,12 +334,12 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   saveText: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
   },
 
   // White Card
   card: {
-    backgroundColor: colors.neutral.cardInputNav,
+    backgroundColor: colors.neutral.gray300,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomLeftRadius: 0,
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
   width: 20,
   height: 20,
   borderRadius: 10,
-  backgroundColor: colors.brand.hoverLight,
+  backgroundColor: colors.primary.teal100,
   alignItems: 'center',
   justifyContent: 'center',
   marginTop: 2,

@@ -171,7 +171,7 @@ export default function Quiz5Screen({ navigation, route }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.neutral.cardInputNav,
+    backgroundColor: colors.neutral.gray300,
   },
   content: {
     paddingHorizontal: 20,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
   logoLabel: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
   },
 
   // Progress
@@ -202,31 +202,31 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   stepText: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
   },
   progressBg: {
     height: 6,
-    backgroundColor: colors.neutral.appBg,
+    backgroundColor: colors.primary.teal50,
     borderRadius: 999,
     marginBottom: 24,
   },
   progressFill: {
     height: 6,
     width: '100%',
-    backgroundColor: colors.brand.accent,
+    backgroundColor: colors.primary.teal500,
     borderRadius: 999,
   },
 
   // Title
   title: {
-    color: colors.brand.primary,
+    color: colors.primary.teal900,
     marginBottom: 24,
   },
 
   // Subtitle
   subtitle: {
     width: 257,
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
     marginBottom: 28,
   },
 
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   questionLabel: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
     marginBottom: 12,
   },
   optionRow: {
@@ -247,26 +247,26 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 10,
     borderWidth: 1.5,
-    borderColor: colors.neutral.divider,
-    backgroundColor: colors.neutral.cardInputNav,
+    borderColor: colors.neutral.gray300,
+    backgroundColor: colors.neutral.gray300,
     alignItems: 'center',
     justifyContent: 'center',
   },
   optionSelected: {
-    backgroundColor: colors.brand.hoverLight,
-    borderColor: colors.brand.primary,
+    backgroundColor: colors.primary.teal100,
+    borderColor: colors.primary.teal900,
   },
   optionText: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
   },
   optionTextSelected: {
-    color: colors.neutral.primaryText,
+    color: colors.primary.teal900,
   },
 
   // Submit
   submitBtn: {
     height: 52,
-    backgroundColor: colors.brand.primary,
+    backgroundColor: colors.primary.teal900,
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
@@ -274,10 +274,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   submitBtnDisabled: {
-    backgroundColor: colors.neutral.placeholder,
+    backgroundColor: colors.neutral.gray400,
   },
   submitText: {
-    color: colors.neutral.cardInputNav,
+    color: colors.neutral.gray300,
   },
 
   // Back
@@ -286,6 +286,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
   },
   backText: {
-    color: colors.neutral.secondaryText,
+    color: colors.neutral.gray500,
   },
 });
