@@ -12,7 +12,6 @@ export default function LoadingScreen({ navigation, route }) {
 
   const answers = route.params?.answers || {};
   console.log(answers);
-  // {"dental": true, "disability": true, "firstGen": true, "income": "over80k", "partTime": true, "renting": true, "schoolType": "college", "studentStatus": "pr", "studyLoad": "full-time"}
 
   const [error, setError] = useState(false);
 
@@ -40,6 +39,11 @@ export default function LoadingScreen({ navigation, route }) {
       const raw = data.content[0].text.replace(/```json|```/g, '').trim();
       const parsed = JSON.parse(raw);
       console.log(JSON.stringify(parsed, null, 2));
+      
+      parsed.totalAnnualValue = parsed.benefits.reduce((sum, b) => {
+        const match = b.amount.match(/\$([0-9,]+)/);
+        return sum + (match ? parseInt(match[1].replace(',', '')) : 0);
+      }, 0);
 
       await AsyncStorage.setItem('benefits', JSON.stringify(parsed));
       await AsyncStorage.setItem('profile', JSON.stringify(answers));

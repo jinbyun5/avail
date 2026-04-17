@@ -24,7 +24,6 @@ export function buildPrompt(answers) {
 
     Return ONLY valid JSON, no markdown, no explanation:
     {
-    "totalAnnualValue": number,
     "benefits": [
         {
         "id": string,
