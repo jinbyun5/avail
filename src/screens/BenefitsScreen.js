@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
@@ -6,59 +8,31 @@ import { Ionicons } from '@expo/vector-icons';
 
 import { colors, text } from '../styles/Appstyles';
 import BenefitCard from '../components/BenefitCard';
-
-// ─── Mock data ────────────────────────────────────────────────────────────────
-// Replace with API response shape when wiring up the backend.
-
-const ALL_BENEFITS = [
-  {
-    id:          'bc-access-grant',
-    category:    'Student Aid',
-    title:       'BC Access Grant',
-    amount:      'Up to $4,000/yr',
-    eligibility: 'Likely eligible',
-    saved:       false,
-  },
-  {
-    id:          'canada-student-grant',
-    category:    'Student Aid',
-    title:       'Canada Student Grant',
-    amount:      'Up to $3,000/yr',
-    eligibility: 'Likely eligible',
-    saved:       false,
-  },
-  {
-    id:          'gst-hst-credit',
-    category:    'Tax Credit',
-    title:       'GST/HST Credit',
-    amount:      'Up to $519/yr',
-    eligibility: 'Likely eligible',
-    saved:       true,
-  },
-  {
-    id:          'canada-dental-care',
-    category:    'Health',
-    title:       'Canada Dental Care Plan',
-    amount:      'Coverage varies',
-    eligibility: 'Check eligibility',
-    saved:       false,
-  },
-];
-
-// Filter categories surfaced from the user's profile.
-// Replace with API-provided filter list when wiring up the backend.
-const FILTER_CATEGORIES = ['All', 'Student Aid', 'Tax Credit', 'Housing'];
+import { toggleSavedBenefit } from '../data/storage';
 
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function BenefitsScreen() {
+
   const navigation = useNavigation();
+  const [benefits, setBenefits] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
+
+  // Filter categories surfaced from the user's profile.
+  const categories = ['All', ...new Set(benefits.map(b => b.category))];
 
   const filteredBenefits =
     activeFilter === 'All'
-      ? ALL_BENEFITS
-      : ALL_BENEFITS.filter(b => b.category === activeFilter);
+      ? benefits
+      : benefits.filter(b => b.category === activeFilter);
+
+  useEffect(() => {
+    const load = async () => {
+      const raw = await AsyncStorage.getItem('benefits');
+      if (raw) setBenefits(JSON.parse(raw).benefits);
+    };
+    load();
+  }, []);
 
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
@@ -71,7 +45,7 @@ export default function BenefitsScreen() {
         </Pressable>
         <Text style={[text.label, styles.matchesLabel]}>Your matches</Text>
         <Text style={[text.h1, styles.countTitle]}>
-          {ALL_BENEFITS.length} benefits found.
+          {benefits.length} benefits found.
         </Text>
       </View>
 
@@ -82,7 +56,7 @@ export default function BenefitsScreen() {
         style={styles.filterScroll}
         contentContainerStyle={styles.filterContent}
       >
-        {FILTER_CATEGORIES.map(cat => {
+        {categories.map(cat => {
           const active = activeFilter === cat;
           return (
             <Pressable
@@ -108,8 +82,12 @@ export default function BenefitsScreen() {
           <BenefitCard
             key={benefit.id}
             benefit={benefit}
-            // onSaveToggle   — wire to save API later
-            // onViewDetails  — wire to BenefitDetailScreen navigation later
+            onSaveToggle={async (id) => {
+              const updated = await toggleSavedBenefit(id);
+              setBenefits(updated.benefits);
+              console.log('saved benefits:', updated.benefits.filter(b => b.saved));
+            }}
+            onViewDetails={() => navigation.navigate('BenefitDetail', { benefit })}
           />
         ))}
       </ScrollView>
@@ -130,7 +108,6 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 20,
     paddingTop: 16,
-    paddingBottom: 16,
   },
   backButton: {
     flexDirection: 'row',
@@ -155,7 +132,7 @@ const styles = StyleSheet.create({
   },
   filterContent: {
     paddingHorizontal: 20,
-    paddingBottom: 16,
+    paddingVertical: 24,
     gap: 8,
   },
   filterChip: {
@@ -164,15 +141,17 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     borderWidth: 1,
     borderColor: colors.neutral.gray300,
+    backgroundColor: '#fff',
   },
   filterChipActive: {
-    borderColor: colors.primary.teal500,
+    borderColor: colors.primary.teal900,
+    backgroundColor: colors.primary.teal100,
   },
   filterLabel: {
     color: colors.neutral.gray500,
   },
   filterLabelActive: {
-    color: colors.primary.teal500,
+    color: colors.primary.teal900,
   },
 
   // Benefits list

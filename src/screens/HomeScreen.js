@@ -1,3 +1,6 @@
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { View, Text, Image, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -5,42 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { colors, text } from '../styles/Appstyles';
 import BenefitCard from '../components/BenefitCard';
-
-// ─── Mock data ────────────────────────────────────────────────────────────────
-// Replace with API response shape when wiring up the backend.
-
-const SUMMARY = {
-  annualValue:  '$7,919',
-  matchedCount: 5,
-  categories:   ['Student Aid', 'Tax Credit', 'Housing', 'Health'],
-};
-
-const TOP_MATCHES = [
-  {
-    id:          'bc-access-grant',
-    category:    'Student Aid',
-    title:       'BC Access Grant',
-    amount:      'Up to $4,000/yr',
-    eligibility: 'Likely eligible',
-    saved:       false,
-  },
-  {
-    id:          'canada-student-grant',
-    category:    'Student Aid',
-    title:       'Canada Student Grant',
-    amount:      'Up to $3,000/yr',
-    eligibility: 'Likely eligible',
-    saved:       false,
-  },
-  {
-    id:          'gst-hst-credit',
-    category:    'Tax Credit',
-    title:       'GST/HST Credit',
-    amount:      'Up to $519/yr',
-    eligibility: 'Likely eligible',
-    saved:       true,
-  },
-];
+import { toggleSavedBenefit } from '../data/storage';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -65,7 +33,25 @@ function SummaryChip({ label }) {
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function HomeScreen() {
+
   const navigation = useNavigation();
+  const [benefits, setBenefits] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      const raw = await AsyncStorage.getItem('benefits');
+      if (raw) setBenefits(JSON.parse(raw));
+    };
+    load();
+  }, []);
+
+  if (!benefits) return null;
+
+  const annualValue = `$${benefits.totalAnnualValue.toLocaleString()}`;
+  const matchedCount = benefits.benefits.length;
+  const categories = [...new Set(benefits.benefits.map(b => b.category))];
+  const topMatches = benefits.benefits.slice(0, 3);
+
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
       <ScrollView
@@ -91,12 +77,12 @@ export default function HomeScreen() {
         {/* ── Summary card ── */}
         <View style={styles.summaryCard}>
           <Text style={[text.label, styles.summaryLabel]}>EST. ANNUAL VALUE</Text>
-          <Text style={[text.hero, styles.summaryValue]}>{SUMMARY.annualValue}</Text>
+          <Text style={[text.hero, styles.summaryValue]}>{annualValue}</Text>
           <Text style={[text.smallReg, styles.summarySubtext]}>
-            across {SUMMARY.matchedCount} matched benefits
+            across {matchedCount} matched benefits
           </Text>
           <View style={styles.chipRow}>
-            {SUMMARY.categories.map(cat => (
+            {categories.map(cat => (
               <SummaryChip key={cat} label={cat} />
             ))}
           </View>
@@ -131,12 +117,16 @@ export default function HomeScreen() {
 
         {/* ── Top matches ── */}
         <Text style={[text.smallMed, styles.sectionLabel]}>Your top matches</Text>
-        {TOP_MATCHES.map(benefit => (
+        {topMatches.map(benefit => (
           <BenefitCard
             key={benefit.id}
             benefit={benefit}
-            // onSaveToggle — wire to save API later
-            // onViewDetails — wire to BenefitDetailScreen navigation later
+            onSaveToggle={async (id) => {
+              const updated = await toggleSavedBenefit(id);
+              setBenefits(updated);
+              console.log('saved benefits:', updated.benefits.filter(b => b.saved));
+            }}
+            onViewDetails={() => navigation.navigate('BenefitDetail', { benefit })}
           />
         ))}
       </ScrollView>
