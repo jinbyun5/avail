@@ -19,14 +19,19 @@ const PROFILE_ROWS = [
 
 // Screen
 export default function ProfileScreen({ navigation }) {
+
     const [profile, setProfile] = useState(null);
+    const [benefits, setBenefits] = useState(null);
 
     // Load profile from AsyncStorage
     useEffect(() => {
         const loadProfile = async () => {
             try {
-                const stored = await AsyncStorage.getItem('userProfile');
+                const stored = await AsyncStorage.getItem('profile');
                 if (stored) setProfile(JSON.parse(stored));
+
+                const storedBenefits = await AsyncStorage.getItem('benefits');
+                if (storedBenefits) setBenefits(JSON.parse(storedBenefits));
             } catch (error) {
                 console.error('Failed to load profile:', error);
             }
@@ -60,11 +65,11 @@ export default function ProfileScreen({ navigation }) {
                 {/* Stat cards */}
                 <View style={styles.statRow}>
                     <View style={styles.statCard}>
-                        <Text style={[text.h1, styles.statNumber]}>5</Text>
+                        <Text style={[text.h1, styles.statNumber]}>{benefits?.benefits.length ?? '-'}</Text>
                         <Text style={[text.smallReg, styles.statLabel]}>Benefits matched</Text>
                     </View>
                     <View style={styles.statCard}>
-                        <Text style={[text.h1, styles.statNumber]}>$7,919</Text>
+                        <Text style={[text.h1, styles.statNumber]}>${benefits?.totalAnnualValue.toLocaleString() ?? '-'}</Text>
                         <Text style={[text.smallReg, styles.statLabel]}>Est. annual value</Text>
                     </View>
                 </View>
