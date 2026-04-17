@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   View,
   Text,
@@ -21,7 +22,7 @@ const QUICK_PROMPTS = [
   "Which benefit gives me the most money?",
 ];
 
-const API_KEY = process.env.EXPO_PUBLIC_ANTHROPIC_KEY;
+const API_KEY = process.env.EXPO_PUBLIC_ANTHROPIC_API_KEY;
 
 export default function AskScreen() {
   const [messages, setMessages] = useState([
@@ -33,6 +34,8 @@ export default function AskScreen() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
+  const [profile, setProfile] = useState(null);
+  const [benefits, setBenefits] = useState(null);
 
   // Send message to Claude API
   const sendMessage = async (userMessage) => {
@@ -55,10 +58,13 @@ export default function AskScreen() {
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 1024,
-          system: `You are avail, a helpful AI assistant that helps Canadians in British Columbia discover government benefits and student aid programs. 
-          Keep your answers concise, friendly, and in plain English. 
-          Focus on BC provincial programs and relevant federal programs.
-          Always remind users to verify eligibility directly with the official program.`,
+          system: `You are avail, a helpful AI assistant for BC students.
+                    The user's profile: ${JSON.stringify(profile)}
+                    Their matched benefits: ${JSON.stringify(benefits)}
+                    Answer questions about their specific situation only.
+                    Keep answers concise and friendly.
+                    Always remind users to verify eligibility directly.
+                    Do not use markdown formatting like ** or ##. Plain text only.`,
           messages: updatedMessages.map(m => ({
             role: m.role,
             content: m.content,
@@ -83,6 +89,16 @@ export default function AskScreen() {
       scrollRef.current?.scrollToEnd({ animated: true });
     }
   };
+
+  useEffect(() => {
+    const load = async () => {
+      const p = await AsyncStorage.getItem('profile');
+      const b = await AsyncStorage.getItem('benefits');
+      if (p) setProfile(JSON.parse(p));
+      if (b) setBenefits(JSON.parse(b));
+    };
+    load();
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
