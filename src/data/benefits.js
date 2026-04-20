@@ -27,12 +27,12 @@ export const BC_BENEFITS = `
     Apply Label: Apply on canada.ca
 
     4. Canada Dental Care Plan
-   ID: canada-dental-care
-   Category: Health
-   Amount: Coverage varies
-   Eligible if: no existing dental insurance, income under $90,000/yr, Canadian resident
-   Apply URL: https://canada.ca/dental-care
-   Apply Label: Apply on canada.ca
+    ID: canada-dental-care
+    Category: Health
+    Amount: Up to $1,000/yr
+    Eligible if: no existing dental insurance, income under $90,000/yr, Canadian resident
+    Apply URL: https://canada.ca/dental-care
+    Apply Label: Apply on canada.ca
 
     5. BC Renter's Tax Credit
     ID: bc-renters-tax-credit

@@ -17,20 +17,22 @@ import { colors, text } from '../styles/Appstyles';
 
 // Preloaded prompt suggestions
 const QUICK_PROMPTS = [
-  "What's the deadline for the BC Access Grant?",
-  "Do I qualify if I'm part-time?",
   "Which benefit gives me the most money?",
+  "How do I apply for my matched benefits?",
+  "What documents do I need to apply?",
 ];
 
 const API_KEY = process.env.EXPO_PUBLIC_ANTHROPIC_API_KEY;
 
 export default function AskScreen() {
+
   const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: "Hi! I've reviewed your profile and found 5 BC student benefits you may qualify for. What would you like to know more about?",
-    },
+    // {
+    //   role: 'assistant',
+    //   content: "Hi! I've reviewed your profile and found 5 BC student benefits you may qualify for. What would you like to know more about?",
+    // },
   ]);
+  
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const scrollRef = useRef(null);
@@ -43,6 +45,7 @@ export default function AskScreen() {
 
     const userMsg = { role: 'user', content: userMessage };
     const updatedMessages = [...messages, userMsg];
+
     setMessages(updatedMessages);
     setInput('');
     setLoading(true);
@@ -58,13 +61,24 @@ export default function AskScreen() {
         body: JSON.stringify({
           model: 'claude-haiku-4-5-20251001',
           max_tokens: 1024,
-          system: `You are avail, a helpful AI assistant for BC students.
+          system: `
+                    You are avail, a helpful AI assistant that helps Canadians in British Columbia discover government benefits and student aid programs.
                     The user's profile: ${JSON.stringify(profile)}
                     Their matched benefits: ${JSON.stringify(benefits)}
                     Answer questions about their specific situation only.
-                    Keep answers concise and friendly.
+
+                    Keep your answers SHORT and conversational — 3 to 4 sentences maximum. No headers, no long paragraphs.
+                    Write in plain English, like a knowledgeable friend texting you.
+                    Always end with a direct next step or official source (e.g. studentaidbc.ca, canada.ca).
                     Always remind users to verify eligibility directly.
-                    Do not use markdown formatting like ** or ##. Plain text only.`,
+                    If you are unsure about a specific detail, do NOT say you don't know. Instead, give the best general guidance you can and point the user to the official source.
+                    Never leave the user without a next step.
+                    Use the requirements field from the matched benefits to answer document-related questions.
+
+                    Never:
+                    - Use markdown formatting like ** or ##. Plain text only.
+                    - Start responses with "That's a great question" or "I don't have specific information". Just answer directly.
+                  `,
           messages: updatedMessages.map(m => ({
             role: m.role,
             content: m.content,
@@ -95,7 +109,14 @@ export default function AskScreen() {
       const p = await AsyncStorage.getItem('profile');
       const b = await AsyncStorage.getItem('benefits');
       if (p) setProfile(JSON.parse(p));
-      if (b) setBenefits(JSON.parse(b));
+      if (b) {
+        const parsed = JSON.parse(b);
+        setBenefits(parsed);
+        setMessages([{
+          role: 'assistant',
+          content: `Hi! I've reviewed your profile and found ${parsed.benefits.length} BC student benefits you may qualify for. What would you like to know more about?`,
+        }]);
+      }
     };
     load();
   }, []);
