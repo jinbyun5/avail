@@ -15,7 +15,7 @@ export const BC_BENEFITS = `
     Category: Student Aid
     Amount: Up to $3,000/yr
     Eligible if: domestic student or permanent resident, financial need, full-time or part-time
-    Apply URL: https://canada.ca/student-aid
+    Apply URL: https://www.canada.ca/en/services/benefits/education/student-aid/grants-loans.html
     Apply Label: Apply on canada.ca
 
     3. GST/HST Credit
@@ -31,7 +31,7 @@ export const BC_BENEFITS = `
     Category: Health
     Amount: Up to $1,000/yr
     Eligible if: no existing dental insurance, income under $90,000/yr, Canadian resident
-    Apply URL: https://canada.ca/dental-care
+    Apply URL: https://www.canada.ca/en/services/benefits/dental/dental-care-plan/apply.html
     Apply Label: Apply on canada.ca
 
     5. BC Renter's Tax Credit
