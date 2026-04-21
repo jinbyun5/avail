@@ -21,8 +21,12 @@ export default function BenefitDetailScreen({ navigation, route }) {
       : 'You may qualify — additional verification required',
   };
 
-  const handleApply = () => {
+  const handleApply = async () => {
+  const supported = await Linking.canOpenURL(benefit.applyUrl);
+  console.log('Can open URL:', supported, benefit.applyUrl);
+  if (supported) {
     Linking.openURL(benefit.applyUrl);
+  }
   };
 
   const handleAskAvail = () => {
