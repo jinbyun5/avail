@@ -22,11 +22,11 @@ export default function BenefitDetailScreen({ navigation, route }) {
   };
 
   const handleApply = async () => {
-  const supported = await Linking.canOpenURL(benefit.applyUrl);
-  console.log('Can open URL:', supported, benefit.applyUrl);
-  if (supported) {
-    Linking.openURL(benefit.applyUrl);
-  }
+    try {
+      await Linking.openURL(benefit.applyUrl);
+    } catch (error) {
+    console.error('Cannot open URL:', error);
+    }
   };
 
   const handleAskAvail = () => {
