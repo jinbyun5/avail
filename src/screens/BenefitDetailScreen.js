@@ -112,7 +112,6 @@ export default function BenefitDetailScreen({ navigation, route }) {
         <TouchableOpacity style={styles.askBtn} onPress={handleAskAvail} activeOpacity={0.8}>
           <Text style={[text.bodyMed, styles.askBtnText]}>Ask avail about this benefit</Text>
         </TouchableOpacity>
-
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,21 +24,23 @@ export default function ProfileScreen({ navigation }) {
     const [profile, setProfile] = useState(null);
     const [benefits, setBenefits] = useState(null);
 
-    // Load profile from AsyncStorage
-    useEffect(() => {
-        const loadProfile = async () => {
-            try {
-                const stored = await AsyncStorage.getItem('profile');
-                if (stored) setProfile(JSON.parse(stored));
+    // Reload on every focus so saves/unsaves are reflected immediately
+    useFocusEffect(
+        useCallback(() => {
+            const loadProfile = async () => {
+                try {
+                    const stored = await AsyncStorage.getItem('profile');
+                    if (stored) setProfile(JSON.parse(stored));
 
-                const storedBenefits = await AsyncStorage.getItem('benefits');
-                if (storedBenefits) setBenefits(JSON.parse(storedBenefits));
-            } catch (error) {
-                console.error('Failed to load profile:', error);
-            }
-        };
-        loadProfile();
-    }, []);
+                    const storedBenefits = await AsyncStorage.getItem('benefits');
+                    if (storedBenefits) setBenefits(JSON.parse(storedBenefits));
+                } catch (error) {
+                    console.error('Failed to load profile:', error);
+                }
+            };
+            loadProfile();
+        }, [])
+    );
 
     const formatValue = (key, value, boolean) => {
         if (value === null || value === undefined) return '-';
