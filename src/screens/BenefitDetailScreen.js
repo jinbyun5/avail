@@ -241,15 +241,19 @@ const styles = StyleSheet.create({
 
   // Ask avail button
   askBtn: {
-    height: 52,
+    minHeight: 52,
     borderRadius: 12,
     backgroundColor: colors.primary.teal100,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
   },
+
   askBtnText: {
     color: colors.primary.teal900,
+    textAlign: 'center',
   },
 
   // Save for later
