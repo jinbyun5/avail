@@ -24,8 +24,8 @@ export const CATEGORY_LABEL = {
 // Maps an eligibility string from the API to its badge style.
 // Add new states here as the API introduces them.
 const ELIGIBILITY_BADGE = {
-  'Likely eligible':  { icon: '✓', bg: colors.status.success, fg: colors.status.successText },
-  'Check eligibility':{ icon: '⚠', bg: colors.status.warning, fg: colors.status.warningText },
+  'Likely eligible':  { icon: 'checkmark-circle', bg: colors.status.success, fg: colors.status.successText },
+  'Check eligibility':{ icon: 'warning',           bg: colors.status.warning, fg: colors.status.warningText },
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -60,8 +60,9 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
         </View>
 
         <View style={[styles.eligibilityBadge, { backgroundColor: badge.bg }]}>
+          <Ionicons name={badge.icon} size={12} color={badge.fg} />
           <Text style={[text.smallMed, { color: badge.fg }]}>
-            {badge.icon} {benefit.eligibility}
+            {benefit.eligibility}
           </Text>
         </View>
       </View>
@@ -124,6 +125,9 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   eligibilityBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 100,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -91,6 +91,31 @@ export default function ProfileScreen({ navigation }) {
                             </View>
                     ))}
                 </View>
+
+{/* Saved Benefits */}
+{benefits?.benefits.filter(b => b.saved).length > 0 && (
+  <View style={styles.savedSection}>
+    <Text style={[text.label, styles.savedLabel]}>Saved Benefits</Text>
+    <View style={styles.card}>
+      {benefits.benefits.filter(b => b.saved).map((benefit, index, arr) => (
+        <View key={benefit.id}>
+          <Pressable
+            style={({ pressed }) => [styles.savedRow, pressed && { opacity: 0.7 }]}
+            onPress={() => navigation.navigate('BenefitDetail', { benefit })}
+          >
+            <Ionicons name="star" size={18} color={colors.primary.teal500} />
+            <View style={styles.savedRowText}>
+              <Text style={[text.bodyMed, styles.savedTitle]}>{benefit.title}</Text>
+              <Text style={[text.smallReg, styles.savedCategory]}>{benefit.category}</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.neutral.gray400} />
+          </Pressable>
+          {index < arr.length - 1 && <View style={styles.divider} />}
+        </View>
+      ))}
+    </View>
+  </View>
+)}
 
 {/* Update my answers */}
 <TouchableOpacity
@@ -206,6 +231,30 @@ const styles = StyleSheet.create({
     divider: {
         height: 1,
         backgroundColor: colors.neutral.gray300,
+    },
+
+    savedSection: {
+        marginBottom: 24,
+    },
+    savedLabel: {
+        color: colors.neutral.gray500,
+        marginBottom: 12,
+    },
+    savedRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingVertical: 16,
+        paddingHorizontal: 20,
+        gap: 12,
+    },
+    savedRowText: {
+        flex: 1,
+    },
+    savedTitle: {
+        color: '#1E293B',
+    },
+    savedCategory: {
+        color: colors.neutral.gray500,
     },
 
     updateBtn: {
