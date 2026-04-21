@@ -11,12 +11,22 @@ export default function BenefitDetailScreen({ navigation, route }) {
   const benefit = route.params?.benefit;
   const labelPalette = CATEGORY_LABEL[benefit.category];
 
+  const isLikelyEligible = benefit.eligibility === 'Likely eligible';
+
+  const eligibilityConfig = {
+    bg: isLikelyEligible ? colors.status.success : colors.status.warning,
+    iconBg: isLikelyEligible ? colors.status.successText : colors.status.warningText,
+    subtitle: isLikelyEligible 
+      ? 'Based on your profile — verify before applying'
+      : 'You may qualify — additional verification required',
+  };
+
   const handleApply = () => {
     Linking.openURL(benefit.applyUrl);
   };
 
   const handleAskAvail = () => {
-    navigation.navigate('Ask', { benefitTitle: benefit.title });
+    navigation.navigate('MainTabs', { screen: 'Ask', params: { benefitTitle: benefit.title } });
   };
 
   return (
@@ -47,16 +57,20 @@ export default function BenefitDetailScreen({ navigation, route }) {
         <View style={styles.card}>
 
         {/* Likely eligible badge */}
-        <View style={styles.eligibilityBadge}>
-          <View style={styles.eligibilityIcon}>
-            <Ionicons name="checkmark" size={14} color={colors.neutral.gray300} />
+        <View style={[styles.eligibilityBadge, { backgroundColor: eligibilityConfig.bg }]}>
+          <View style={[styles.eligibilityIcon, { backgroundColor: eligibilityConfig.iconBg }]}>
+          <Ionicons 
+            name={isLikelyEligible ? "checkmark" : "warning"} 
+            size={14} 
+            color={eligibilityConfig.bg}
+          />
           </View>
-          <View>
-            <Text style={[text.bodyMed,styles.eligibilityTitle]}>
+          <View style={{ flexShrink: 1 }}>
+          <Text style={[text.bodyMed, styles.eligibilityTitle, { color: eligibilityConfig.iconBg }]}>
               {benefit.eligibility}
             </Text>
             <Text style={[text.bodyReg, styles.eligibilitySubtitle]}>
-              Based on your profile — verify before applying
+              {eligibilityConfig.subtitle}
             </Text>
           </View>
         </View>
@@ -99,11 +113,6 @@ export default function BenefitDetailScreen({ navigation, route }) {
           <Text style={[text.bodyMed, styles.askBtnText]}>Ask avail about this benefit</Text>
         </TouchableOpacity>
 
-        {/* Save for later */}
-        <TouchableOpacity style={styles.saveBtn} activeOpacity={0.7}>
-          <Ionicons name="star-outline" size={16} color={colors.neutral.gray500} />
-          <Text style={[text.smallReg, styles.saveText]}>Save for later</Text>
-        </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -162,7 +171,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     gap: 12,
-    backgroundColor: colors.status.success,
     borderRadius: 12,
     padding: 16,
     marginBottom: 20,
@@ -172,7 +180,6 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: colors.status.successText,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 2,
@@ -254,17 +261,6 @@ const styles = StyleSheet.create({
   askBtnText: {
     color: colors.primary.teal900,
     textAlign: 'center',
-  },
-
-  // Save for later
-  saveBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 6,
-  },
-  saveText: {
-    color: colors.neutral.gray500,
   },
 
   // White Card
