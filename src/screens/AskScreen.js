@@ -5,9 +5,11 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   ScrollView,
   StyleSheet,
   KeyboardAvoidingView,
+  Keyboard,
   Platform,
   ActivityIndicator,
 } from 'react-native';
@@ -114,6 +116,8 @@ export default function AskScreen() {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={0}
       >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={{ flex: 1 }}>
 
         {/* Header */}
         <View style={styles.header}>
@@ -196,6 +200,8 @@ export default function AskScreen() {
           </TouchableOpacity>
         </View>
 
+        </View>
+      </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -204,7 +210,7 @@ export default function AskScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.primary.teal50,
+    backgroundColor: '#FEFDFD',
   },
   keyboardView: {
     flex: 1,
