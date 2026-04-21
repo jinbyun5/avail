@@ -138,7 +138,7 @@ export default function ProfileScreen({ navigation }) {
   activeOpacity={0.8}
 >
   <Text style={[text.bodyMed, styles.footerBtnText]}>
-    View all my benefits
+    View all my benefits hi 
   </Text>
 </TouchableOpacity>
             </ScrollView>
