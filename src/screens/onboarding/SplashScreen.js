@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 import { colors, text } from '../../styles/Appstyles';
 
@@ -9,8 +10,21 @@ import { colors, text } from '../../styles/Appstyles';
 export default function SplashScreen({ navigation }) {
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('Welcome');
+    const timer = setTimeout(async() => {
+      try {
+        // check if user has already completed onboarding
+        const profile = await AsyncStorage.getItem('userProfile');
+        if (profile) {
+          // already completed onboarding, navigate to main app
+          navigation.navigate('MainTabs');
+        } else {
+          // first time user, navigate to onboarding flow
+          navigation.navigate('Welcome');
+        }
+      } catch (error) {
+        // if error, default to onboarding flow
+        navigation.navigate('Welcome');
+      }
     }, 2000);
 
     return () => clearTimeout(timer);
