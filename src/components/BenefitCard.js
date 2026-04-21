@@ -39,7 +39,9 @@ const ELIGIBILITY_BADGE = {
  *   onViewDetails  — callback(id) — wire to BenefitDetailScreen navigation
  */
 export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
-  const [saved, setSaved] = useState(benefit.saved);
+  // const [saved, setSaved] = useState(benefit.saved);
+  const saved = benefit.saved;
+  const setSaved = () => {};
 
   const cardBg      = CARD_BG[benefit.category] ?? colors.neutral.gray300;
   const labelPalette = CATEGORY_LABEL[benefit.category];

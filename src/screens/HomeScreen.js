@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { View, Text, Image, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { colors, text } from '../styles/Appstyles';
 import BenefitCard from '../components/BenefitCard';
@@ -37,14 +37,24 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const [benefits, setBenefits] = useState(null);
 
-  useEffect(() => {
-    const load = async () => {
-      const raw = await AsyncStorage.getItem('benefits');
-      if (raw) setBenefits(JSON.parse(raw));
-    };
-    load();
-  }, []);
+  // useEffect(() => {
+  //   const load = async () => {
+  //     const raw = await AsyncStorage.getItem('benefits');
+  //     if (raw) setBenefits(JSON.parse(raw));
+  //   };
+  //   load();
+  // }, []);
 
+  useFocusEffect(
+    useCallback(() => {
+      const load = async () => {
+        const raw = await AsyncStorage.getItem('benefits');
+        if (raw) setBenefits(JSON.parse(raw));
+      };
+      load();
+    }, [])
+  );
+  
   if (!benefits) return null;
 
   const annualValue = `$${benefits.totalAnnualValue.toLocaleString()}`;

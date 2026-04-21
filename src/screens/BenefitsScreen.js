@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { colors, text } from '../styles/Appstyles';
@@ -26,13 +26,15 @@ export default function BenefitsScreen() {
       ? benefits
       : benefits.filter(b => b.category === activeFilter);
 
-  useEffect(() => {
-    const load = async () => {
-      const raw = await AsyncStorage.getItem('benefits');
-      if (raw) setBenefits(JSON.parse(raw).benefits);
-    };
-    load();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const load = async () => {
+        const raw = await AsyncStorage.getItem('benefits');
+        if (raw) setBenefits(JSON.parse(raw).benefits);
+      };
+      load();
+    }, [])
+  );
 
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
