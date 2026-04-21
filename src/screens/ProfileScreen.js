@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     },
 
     savedSection: {
-        marginBottom: 24,
+        marginBottom: 0,
     },
     savedLabel: {
         color: colors.neutral.gray500,
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 16,
+        marginTop: 0,
         marginBottom: 12,
     },
 
