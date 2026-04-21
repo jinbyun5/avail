@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
 import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 import { colors, text } from '../../styles/Appstyles';
@@ -32,7 +31,6 @@ export default function SplashScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
 
       <View style={styles.iconWrapper}>
         <Image
