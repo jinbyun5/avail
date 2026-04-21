@@ -7,6 +7,9 @@ import Button from '../../components/Button';
 
 import { colors, text } from '../../styles/Appstyles';
 
+// Quiz 2 — School type
+// Captures the type of institution the student is attending.
+// Merges with previous answers and passes forward to Quiz 3.
 const OPTIONS = [
   { key: 'university',  label: 'University' },
   { key: 'college',     label: 'College / BCIT' },
@@ -16,6 +19,7 @@ const OPTIONS = [
 
 export default function Quiz2Screen({ navigation, route }) {
 
+  // Carry forward answers collected in previous quiz screens
   const previousAnswers = route.params?.answers || {};
   const [selected, setSelected] = useState(null);
 

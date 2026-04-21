@@ -8,6 +8,10 @@ import Button from '../../components/Button';
 
 import { colors, text } from '../../styles/Appstyles';
 
+// Quiz 5 — Additional details
+// Captures yes/no answers for renting, part-time work, dental insurance,
+// first-generation status, and disability. Merges all answers and navigates
+// to the Loading screen where the Claude API call is made.
 const QUESTIONS = [
   { key: 'renting',    label: 'Are you currently renting?' },
   { key: 'partTime',   label: 'Do you work part-time while studying?' },
@@ -17,6 +21,8 @@ const QUESTIONS = [
 ];
 
 export default function Quiz5Screen({ navigation, route }) {
+
+  // Carry forward answers collected in previous quiz screens
   const previousAnswers = route.params?.answers || {};
 
   const [answers, setAnswers] = useState({
@@ -27,7 +33,7 @@ export default function Quiz5Screen({ navigation, route }) {
     disability: null,
   });
 
-//   reset answers to null whenever screen is focused (in case user goes back to edit previous questions)
+  //Reset answers to null whenever screen is focused (in case user goes back to edit previous questions)
   useFocusEffect(
   useCallback(() => {
     setAnswers({

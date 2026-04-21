@@ -7,6 +7,9 @@ import Button from '../../components/Button';
 
 import { colors, text } from '../../styles/Appstyles';
 
+// Quiz 1 — Study load
+// Captures whether the student is studying full-time or part-time.
+// Passes the answer forward to Quiz 2 via route params.
 export default function Quiz1Screen({ navigation, route }) {
 
   const [selected, setSelected] = useState(null);

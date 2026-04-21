@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { View, Text, Image, ScrollView, Pressable, StyleSheet } from 'react-native';
@@ -37,14 +37,6 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const [benefits, setBenefits] = useState(null);
 
-  // useEffect(() => {
-  //   const load = async () => {
-  //     const raw = await AsyncStorage.getItem('benefits');
-  //     if (raw) setBenefits(JSON.parse(raw));
-  //   };
-  //   load();
-  // }, []);
-
   useFocusEffect(
     useCallback(() => {
       const load = async () => {
@@ -54,7 +46,7 @@ export default function HomeScreen() {
       load();
     }, [])
   );
-  
+
   if (!benefits) return null;
 
   const annualValue = `$${benefits.totalAnnualValue.toLocaleString()}`;
@@ -134,7 +126,6 @@ export default function HomeScreen() {
             onSaveToggle={async (id) => {
               const updated = await toggleSavedBenefit(id);
               setBenefits(updated);
-              console.log('saved benefits:', updated.benefits.filter(b => b.saved));
             }}
             onViewDetails={() => navigation.navigate('BenefitDetail', { benefit })}
           />

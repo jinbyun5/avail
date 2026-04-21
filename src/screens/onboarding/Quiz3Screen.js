@@ -7,6 +7,9 @@ import Button from '../../components/Button';
 
 import { colors, text } from '../../styles/Appstyles';
 
+// Quiz 3 — Annual household income
+// Captures an income range to determine grant and credit eligibility.
+// Income is never stored beyond the current session.
 const OPTIONS = [
   { key: 'under40k',  label: 'Under $40K' },
   { key: '40k-80k',   label: '$40K – $80K' },
@@ -15,6 +18,7 @@ const OPTIONS = [
 
 export default function Quiz3Screen({ navigation, route }) {
 
+  // Carry forward answers collected in previous quiz screens
   const previousAnswers = route.params?.answers || {};
   const [selected, setSelected] = useState(null);
 

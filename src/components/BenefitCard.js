@@ -1,7 +1,5 @@
-import { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-
 import { colors, text } from '../styles/Appstyles';
 
 // ─── Design token mappings ────────────────────────────────────────────────────
@@ -39,7 +37,7 @@ const ELIGIBILITY_BADGE = {
  *   onViewDetails  — callback(id) — wire to BenefitDetailScreen navigation
  */
 export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
-  // const [saved, setSaved] = useState(benefit.saved);
+
   const saved = benefit.saved;
   const setSaved = () => {};
 
@@ -52,7 +50,6 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
       style={({ pressed }) => [styles.card, { backgroundColor: cardBg }, pressed && styles.pressed]}
       onPress={() => onViewDetails?.(benefit.id)}
     >
-
       {/* Category chip + eligibility badge */}
       <View style={styles.cardTop}>
         <View style={[styles.categoryChip, { backgroundColor: labelPalette?.bg ?? colors.neutral.gray300 }]}>

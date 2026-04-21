@@ -11,8 +11,6 @@ import { colors, text } from '../../styles/Appstyles';
 export default function LoadingScreen({ navigation, route }) {
 
   const answers = route.params?.answers || {};
-  console.log(answers);
-
   const [error, setError] = useState(false);
 
   const fetchBenefits = useCallback(async () => {
@@ -38,7 +36,6 @@ export default function LoadingScreen({ navigation, route }) {
       const data = await response.json();
       const raw = data.content[0].text.replace(/```json|```/g, '').trim();
       const parsed = JSON.parse(raw);
-      console.log(JSON.stringify(parsed, null, 2));
       
       parsed.totalAnnualValue = parsed.benefits.reduce((sum, b) => {
         const match = b.amount.match(/\$([0-9,]+)/);
@@ -50,7 +47,6 @@ export default function LoadingScreen({ navigation, route }) {
 
       navigation.navigate('MainTabs');
     } catch (err) {
-      console.error(err);
       setError(true);
     }
   }, []);

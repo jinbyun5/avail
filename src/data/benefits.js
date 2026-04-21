@@ -1,4 +1,3 @@
-// src/data/benefits.js
 export const BC_BENEFITS = `
     AVAILABLE BC STUDENT BENEFITS:
 

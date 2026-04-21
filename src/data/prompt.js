@@ -1,4 +1,3 @@
-// src/data/prompt.js
 import { BC_BENEFITS } from './benefits';
 
 export function buildPrompt(answers) {
