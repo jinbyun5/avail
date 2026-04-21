@@ -46,7 +46,10 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
   const badge       = ELIGIBILITY_BADGE[benefit.eligibility] ?? ELIGIBILITY_BADGE['Likely eligible'];
 
   return (
-    <View style={[styles.card, { backgroundColor: cardBg }]}>
+    <Pressable
+      style={({ pressed }) => [styles.card, { backgroundColor: cardBg }, pressed && styles.pressed]}
+      onPress={() => onViewDetails?.(benefit.id)}
+    >
 
       {/* Category chip + eligibility badge */}
       <View style={styles.cardTop}>
@@ -92,7 +95,7 @@ export default function BenefitCard({ benefit, onSaveToggle, onViewDetails }) {
           <Ionicons name="chevron-forward" size={14} color={colors.primary.teal900} />
         </Pressable>
       </View>
-    </View>
+    </Pressable>
   );
 }
 
