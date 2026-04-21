@@ -98,12 +98,7 @@ export default function BenefitDetailScreen({ navigation, route }) {
         <TouchableOpacity style={styles.askBtn} onPress={handleAskAvail} activeOpacity={0.8}>
           <Text style={[text.bodyMed, styles.askBtnText]}>Ask avail about this benefit</Text>
         </TouchableOpacity>
-
-        {/* Save for later */}
-        <TouchableOpacity style={styles.saveBtn} activeOpacity={0.7}>
-          <Ionicons name="star-outline" size={16} color={colors.neutral.gray500} />
-          <Text style={[text.smallReg, styles.saveText]}>Save for later</Text>
-        </TouchableOpacity>
+        
         </View>
       </ScrollView>
     </SafeAreaView>
